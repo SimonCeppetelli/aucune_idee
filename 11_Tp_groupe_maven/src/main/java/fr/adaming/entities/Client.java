@@ -2,41 +2,96 @@ package fr.adaming.entities;
 
 public class Client {
 	
-	private int id;
-	private String nom;
-	private String prenom;
-	public Client(String nom, String prenom) {
+	private int idClient;
+	private String nomClient;
+	private String adresse;
+	private String email;
+	private String tel;
+	
+	//constructeur
+	public Client(int idClient, String nomClient, String adresse, String email, String tel) {
 		super();
-		this.nom = nom;
-		this.prenom = prenom;
+		this.idClient = idClient;
+		this.nomClient = nomClient;
+		this.adresse = adresse;
+		this.email = email;
+		this.tel = tel;
 	}
-	public Client(int id, String nom, String prenom) {
+
+
+	public Client(String nomClient, String adresse, String email, String tel) {
 		super();
-		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
+		this.nomClient = nomClient;
+		this.adresse = adresse;
+		this.email = email;
+		this.tel = tel;
 	}
+
+
 	public Client() {
 		super();
 	}
-	public int getId() {
-		return id;
+	
+	//getter et setter
+
+	public int getIdClient() {
+		return idClient;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+
+	public void setIdClient(int idClient) {
+		this.idClient = idClient;
 	}
-	public String getNom() {
-		return nom;
+
+
+	public String getNomClient() {
+		return nomClient;
 	}
-	public void setNom(String nom) {
-		this.nom = nom;
+
+
+	public void setNomClient(String nomClient) {
+		this.nomClient = nomClient;
 	}
-	public String getPrenom() {
-		return prenom;
+
+
+	public String getAdresse() {
+		return adresse;
 	}
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
 	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getTel() {
+		return tel;
+	}
+
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Client [idClient=" + idClient + ", nomClient=" + nomClient + ", adresse=" + adresse + ", email=" + email
+				+ ", tel=" + tel + "]";
+	} 
+	
+	
+	
 	
 	
 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		
+	<!-- activation des annotations de l'injection des dépendances: @Value, 
+		@Autowired -->
+	<context:annotation-config />
+
+	<!-- Activation des annotation de la detection des composants: @Component, 
+		@Controller, @Service, @Repository -->
+	<context:component-scan
+		base-package="fr.adaming" />
+
+
+	<!-- config de l'intégration d'un ORM: hibernate avec le contener spring 
+		ioc (pour la gestion automatique) -->
+
+	<!-- 0: spécifier le chemin du fichier data_source.properties -->
+	<context:property-placeholder
+		location="classpath*:data_source.properties" />
+
+	<!-- 1: declaration du bean datasource qui encapsule les infos de la connexion 
+		à la bd -->
+	<bean id="dataSourceBean"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- spécifier les infos de la connexion à la bd via les setters -->
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+	</bean>
+
+	<!-- déclaration du bean session factory -->
+	<bean id="sessionFactoryBean"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- injecter la datasource via les setters -->
+		<property name="dataSource" ref="dataSourceBean" />
+
+		<!--specifier tous les packages ou se trouvent toutes les classes persistentes 
+			grace à la propriéte -->
+		<property name="packagesToScan" value="fr.adaming.entities" />
+
+		<!-- specifier les props hibernate -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hb.dialect}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hb.strategy}</prop>
+				<prop key="hibernate.show_sql">${hb.sql}</prop>
+			</props>
+
+
+		</property>
+
+	</bean>
+	<!-- declaration du bean TransactionBean pour gérer les transaction -->
+	<bean id="transactionManagerBean"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<!-- injection de la dependance sessionfactory -->
+
+		<property name="sessionFactory" ref="sessionFactoryBean" />
+	</bean>
+	<tx:annotation-driven
+		transaction-manager="transactionManagerBean" />
+
+</beans>

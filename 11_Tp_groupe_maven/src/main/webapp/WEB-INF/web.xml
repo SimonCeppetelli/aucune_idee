@@ -1,12 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <display-name>11_Tp_groupe_maven</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>11_Tp_groupe_maven</display-name>
+	
+	<!-- declaration listener pour charger le context: spring ioc -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+
+	</listener>
+
+	<!-- spécifier le chemin du fichier de config du context spring ioc -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/application-context.xml</param-value>
+	</context-param>
+
+	<!-- declaration de la servlet unique (type dispatcher servlet de spring 
+		mvc -->
+	<servlet>
+		<servlet-name>unique</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+		<!-- spécifier le chein de config su context spring mvc -->
+
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/mvc-context.xml</param-value>
+
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+
+		<!-- le mapping de la servlet -->
+		<servlet-name>unique</servlet-name>
+		<url-pattern>/</url-pattern>
+
+
+	</servlet-mapping>
+
+	<!-- la page de lancement du projet -->
+	
+	
 </web-app>
