@@ -1,9 +1,29 @@
 package fr.adaming.entities;
 
 import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="produits")
 
 public class Produit {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_pr")
 	private int idProduit;
 	private String designation;
 	private String description;
@@ -12,7 +32,14 @@ public class Produit {
 	private boolean selectionne;
 	private byte[] photo;
 	
+	// Traduction de l'assocaition UML en java
+	@ManyToMany(cascade=CascadeType.PERSIST)
+	@JoinTable(name="tab_association",joinColumns=@JoinColumn(name="id_pr"), inverseJoinColumns=@JoinColumn(name="co_id"))
+	private List<Commande> commandes;
 	
+	@ManyToOne
+	@JoinColumn(name="ca_id", referencedColumnName="id_ca")
+	private Categorie categorie;
 	
 	
 	public Produit(int idProduit, String designation, String description, double prix, int quantite,
@@ -144,6 +171,34 @@ public class Produit {
 
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
+	}
+
+
+
+
+	public List<Commande> getCommandes() {
+		return commandes;
+	}
+
+
+
+
+	public void setCommandes(List<Commande> commandes) {
+		this.commandes = commandes;
+	}
+
+
+
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+
+
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 

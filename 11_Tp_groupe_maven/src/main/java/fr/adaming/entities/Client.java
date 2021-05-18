@@ -1,12 +1,33 @@
 package fr.adaming.entities;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="clients")
 public class Client {
 	
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_cl")
 	private int idClient;
 	private String nomClient;
 	private String adresse;
 	private String email;
 	private String tel;
+	
+	
+	// Transformation de l'asscoaition UML en JAVA
+	@OneToMany(mappedBy="client")
+	private List<Commande> commande;
 	
 	//constructeur
 	public Client(int idClient, String nomClient, String adresse, String email, String tel) {
@@ -81,6 +102,18 @@ public class Client {
 
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+	
+	
+
+
+	public List<Commande> getCommande() {
+		return commande;
+	}
+
+
+	public void setCommande(List<Commande> commande) {
+		this.commande = commande;
 	}
 
 
