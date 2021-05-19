@@ -19,10 +19,10 @@
 				<th>Photo</th>
 			</tr>
 
-			<c:forEach var="e" items="${p}">
+			<c:forEach var="e" items="${produit}">
 				<tr>
-					<td>${p.id}</td>
-					<td> <img src="${p.img}"/></td>
+					<td>${e.idProduit}</td>
+					<td> <img src="${e.img}"/></td>
 				</tr>
 			</c:forEach>
 		</table>

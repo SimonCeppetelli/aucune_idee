@@ -16,7 +16,7 @@
 	<h1 style="color: green; text-align: center;">page d'ajout de
 		client</h1>
 	<form action="submitAdd" method="post" enctype="multipart/form-data">
-		Select File: <input type="file" name="phot" path="" /> <input type="submit"
+		Select File: <input type="file" name="photo" path="" /> <input type="submit"
 			value="Upload File"/>
 	</form>
 </body>

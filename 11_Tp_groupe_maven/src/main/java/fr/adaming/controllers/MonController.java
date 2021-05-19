@@ -1,24 +1,14 @@
 package fr.adaming.controllers;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -54,8 +44,8 @@ public class MonController {
 
 	// 2: traiter le formulaire soumis
 	@PostMapping("/submitAdd")
-	public String soumettreAjout(ModelMap modeleMVC, @RequestParam("photo") CommonsMultipartFile file){ 
-		
+	public String soumettreAjout(ModelMap modeleMVC, @RequestParam("photo") CommonsMultipartFile file) {
+
 		// convertion du format jpg en byte
 		//
 		// BufferedImage bufferedImage = ImageIO.read(file);
@@ -64,8 +54,8 @@ public class MonController {
 		// WritableRaster raster = bufferedImage.getRaster();
 		// DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
 		// produit.setPhoto(data.getData());
-		//produit.setPhoto(file.getContents());
-		
+		// produit.setPhoto(file.getContents());
+
 		Produit produit = new Produit();
 		produit.setPhoto(file.getBytes());
 
