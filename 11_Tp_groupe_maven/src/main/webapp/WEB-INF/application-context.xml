@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-		
+
 	<!-- activation des annotations de l'injection des dépendances: @Value, 
 		@Autowired -->
 	<context:annotation-config />
@@ -23,6 +23,9 @@
 	<!-- 0: spécifier le chemin du fichier data_source.properties -->
 	<context:property-placeholder
 		location="classpath*:data_source.properties" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
 	<!-- 1: declaration du bean datasource qui encapsule les infos de la connexion 
 		à la bd -->
