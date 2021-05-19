@@ -15,10 +15,13 @@
 <body>
 	<h1 style="color: green; text-align: center;">page d'ajout de
 		client</h1>
-	<form action="submitAdd" method="post" enctype="multipart/form-data">
-		Select File: <input type="file" name="photo" path="" /> <input type="submit"
+		
+	<form:form action="submitAdd" method="post" enctype="multipart/form-data" modelAttribute="pAdd" >
+	
+		Select File: <input type="file" name="phot" /> <input type="submit"
 			value="Upload File"/>
-	</form>
+			
+	</form:form>
 </body>
 </html>
 

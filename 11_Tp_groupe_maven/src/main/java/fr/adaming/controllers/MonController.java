@@ -2,9 +2,12 @@ package fr.adaming.controllers;
 
 import java.util.List;
 
+import javax.xml.ws.ServiceMode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +47,7 @@ public class MonController {
 
 	// 2: traiter le formulaire soumis
 	@PostMapping("/submitAdd")
-	public String soumettreAjout(ModelMap modeleMVC, @RequestParam("photo") CommonsMultipartFile file) {
+	public String soumettreAjout(ModelMap modeleMVC, @RequestParam("phot") CommonsMultipartFile file, @ModelAttribute("pAdd") Produit produit) {
 
 		// convertion du format jpg en byte
 		//
@@ -56,7 +59,6 @@ public class MonController {
 		// produit.setPhoto(data.getData());
 		// produit.setPhoto(file.getContents());
 
-		Produit produit = new Produit();
 		produit.setPhoto(file.getBytes());
 
 		// appel de la méthode service
